@@ -24,7 +24,7 @@ export default function Index() {
         people.map((person, index) => {
           return (
             <div key={index}>
-              person: { person.firstName } {person.lastName} { person.age }
+              Person: { person.firstName } {person.lastName} { person.age }
             </div>
           )
         })
