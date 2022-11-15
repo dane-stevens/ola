@@ -14,6 +14,10 @@ export default function Create() {
 
     const [city, setCity] = useState('')
 
+    const [province, setProvince] = useState('')
+
+    const [language, setLanguage] = useState('')
+
     const [items, changeItems] = useState([
         {
             firstName: 'dane',
@@ -28,7 +32,7 @@ export default function Create() {
         }
     ]) 
     
-    // console.log({items})
+    console.log({items})
 
     return (
         <>
@@ -47,6 +51,8 @@ export default function Create() {
                     phoneNumber: phoneNumber, 
                     mailAddress:mailAddress,
                     city: city,
+                    province: province,
+                    language: language,
                      }])
                 // return changeItems([...items, inputValue])
             }}>
@@ -91,6 +97,41 @@ export default function Create() {
                 }} />
 
                 <br/>
+
+                Province/Territory: 
+                <select value={province} onChange={(event) => {
+                    return setProvince(event.target.value)
+                }}>
+                    <option hidden>Select province/territory...</option>
+                    <option value='AB'>Alberta</option>
+                    <option value='BC'>British Columbia</option>
+                    <option value='MB'>Manitoba</option>
+                    <option value='NB'>New Brunswick</option>
+                    <option value='NL'>Newfoundland & Labrador</option>
+                    <option value='NS'>Nova Scotia</option>
+                    <option value='NT'>Northwest Territories</option>
+                    <option value='NU'>Nunavut</option>
+                    <option value='ON'>Ontario</option>
+                    <option value='PE'>Prince Edward Island</option>
+                    <option value='QC'>Quebec</option>
+                    <option value='SK'>Saskatchewan</option>
+                    <option value='YT'>Yukon</option>      
+
+                </select>
+
+                <br/>
+
+                Language:
+                <select value={language} onChange={(event) => {
+                    return setLanguage(event.target.value)
+                }}>
+                    <option hidden>Select language...</option>
+                    <option value='EN'>English</option>
+                    <option value='FR'>French</option>
+
+                </select>
+
+
 
                 <button type='submit'>Add item</button>
             </form>
