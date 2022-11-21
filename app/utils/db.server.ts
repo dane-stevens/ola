@@ -1,11 +1,9 @@
 import { Sequelize, Op, Model, DataTypes } from "sequelize";
-// import chalk from "chalk";
 
 export const sequelize = new Sequelize({
   dialect: "sqlite",
   storage: "database.sqlite",
 });
-// const sequelize = new Sequelize("sqlite::memory:");
 
 declare global {
   var __sequelize;
