@@ -10,9 +10,13 @@
     "@remix-run/node": "^1.7.5",
     "@remix-run/react": "^1.7.5",
     "@remix-run/serve": "^1.7.5",
+    "chalk": "^5.1.2",
     "isbot": "^3.5.4",
+    "pg-hstore": "^2.3.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sequelize": "^6.25.7",
+    "sqlite3": "^5.1.2"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.7.5",
