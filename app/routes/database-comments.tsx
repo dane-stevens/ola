@@ -12,14 +12,6 @@ export const loader: LoaderFunction = async () => {
   return json({ comments });
 };
 
-// HTTP POST
-export const action: ActionFunction = async ({ request }) => {
-  const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-
-  return Comment.create({ comment: data.comment });
-};
-
 // RENDER
 export default function Create() {
   const { comments } = useLoaderData();
@@ -34,3 +26,11 @@ export default function Create() {
     </>
   );
 }
+
+// HTTP POST
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+
+  return Comment.create({ comment: data.comment });
+};
