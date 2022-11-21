@@ -30,7 +30,7 @@ export default function Create() {
         <input type="text" name="comment" />
         <button type="submit">Save comment</button>
       </form>
-      <pre>{JSON.stringify(comments, null, 4)}</pre>
+      <pre>{JSON.stringify(comments, null, 2)}</pre>
     </>
   );
 }
