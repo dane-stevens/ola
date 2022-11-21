@@ -2,10 +2,6 @@ import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { Comment } from "~/utils/schema.server";
 
-// [Creating an instance]
-// await Comment.create({ comment: "Hello world!" });
-// https://sequelize.org/docs/v6/core-concepts/model-instances/#a-very-useful-shortcut-the-create-method
-
 // HTTP GET
 export const loader: LoaderFunction = async () => {
   const comments = await Comment.findAll();
