@@ -24,7 +24,7 @@ export default function DatabaseComments() {
         <br />
 
         <label>Province:</label>
-        <select type="text" name="province">
+        <select name="province">
           <option hidden>Select province/territory...</option>
           <option value="AB">Alberta</option>
           <option value="BC">British Columbia</option>
