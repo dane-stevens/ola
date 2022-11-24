@@ -2,8 +2,6 @@ import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { Comment } from "~/utils/schema.server";
 
-
-
 // HTTP GET
 export const loader: LoaderFunction = async () => {
   const comments = await Comment.findAll();
@@ -12,21 +10,21 @@ export const loader: LoaderFunction = async () => {
 
 // RENDER
 export default function DatabaseComments() {
-  const {comments} = useLoaderData();
+  const { comments } = useLoaderData();
   return (
     <>
       <h1>Database comments</h1>
       <form method="post">
         <label>Username:</label>
-        <input type='text' name="username" placeholder="Username"/>
-        <br/>
+        <input type="text" name="username" placeholder="Username" />
+        <br />
 
         <label>Comment:</label>
         <input type="text" name="comment" placeholder="Comment" />
-        <br/>
+        <br />
 
         <label>Province:</label>
-        <select type='text' name="province">
+        <select type="text" name="province">
           <option hidden>Select province/territory...</option>
           <option value="AB">Alberta</option>
           <option value="BC">British Columbia</option>
@@ -42,24 +40,22 @@ export default function DatabaseComments() {
           <option value="SK">Saskatchewan</option>
           <option value="YT">Yukon</option>
         </select>
-        <br/>
+        <br />
 
         <label>Registration Date:</label>
-        <input type='date' name="regDate" />
-        <br/>
+        <input type="date" name="regDate" />
+        <br />
 
         <label>Email Address:</label>
-        <input type='text' name="email" placeholder="Email Address"/>
-        <br/>
+        <input type="text" name="email" placeholder="Email Address" />
+        <br />
 
         <label>Sign up for email updates?</label>
-        <input type='checkbox' name='emailList' value='1'/>
-        <input type='hidden' name='emailList' value='0'/>
+        <input type="checkbox" name="emailList" value="1" />
 
         <button type="submit">Save comment</button>
       </form>
       <pre>{JSON.stringify(comments, null, 2)}</pre>
-      
     </>
   );
 }
@@ -69,6 +65,12 @@ export const action = async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
 
-  return Comment.create({ comment: data.comment, username: data.username, province: data.province,
-    regDate: data.regDate, email: data.email, emailList: data.emailList });
+  return Comment.create({
+    comment: data.comment,
+    username: data.username,
+    province: data.province,
+    regDate: data.regDate,
+    email: data.email,
+    emailList: Boolean(data.emailList),
+  });
 };
