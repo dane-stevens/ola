@@ -1,16 +1,19 @@
-import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
+import { ActionArgs, json, LoaderArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { Comment } from "~/utils/schema.server";
+import { z } from "zod";
+import { parseFormData } from "~/utils/validate";
 
 // HTTP GET
-export const loader: LoaderFunction = async () => {
+export const loader = async (args: LoaderArgs) => {
   const comments = await Comment.findAll();
   return json({ comments });
 };
 
 // RENDER
 export default function DatabaseComments() {
-  const { comments } = useLoaderData();
+  const { comments } = useLoaderData<typeof loader>();
+
   return (
     <>
       <h1>Database comments</h1>
@@ -25,7 +28,7 @@ export default function DatabaseComments() {
 
         <label>Province:</label>
         <select name="province">
-          <option hidden>Select province/territory...</option>
+          <option value="">Select province/territory...</option>
           <option value="AB">Alberta</option>
           <option value="BC">British Columbia</option>
           <option value="MB">Manitoba</option>
@@ -51,26 +54,22 @@ export default function DatabaseComments() {
         <br />
 
         <label>Sign up for email updates?</label>
-        <input type="checkbox" name="emailList" value="1" />
+        <input type="checkbox" name="emailList" value="on" />
 
         <button type="submit">Save comment</button>
       </form>
+      {/* <Test /> */}
       <pre>{JSON.stringify(comments, null, 2)}</pre>
     </>
   );
 }
 
 // HTTP POST
-export const action = async ({ request }) => {
+export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
 
-  return Comment.create({
-    comment: data.comment,
-    username: data.username,
-    province: data.province,
-    regDate: data.regDate,
-    email: data.email,
-    emailList: Boolean(data.emailList),
-  });
+  console.log({ data });
+
+  return Comment.create({ ...data, emailList: Boolean(data.emailList) });
 };
